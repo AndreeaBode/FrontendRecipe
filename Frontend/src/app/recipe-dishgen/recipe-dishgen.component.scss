@@ -1,0 +1,159 @@
+.background {
+  background-color: black;
+  opacity: 0.95;
+  min-height: 93.5vh;
+}
+
+.recipes-title {
+  padding-top: 50px;
+  padding-bottom: 40px;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  font-family: Lucida Console, sans-serif;
+}
+
+.recipes-container {
+  display: flex;
+  margin-left: 30px;
+  margin-right: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; 
+}
+
+.recipe-item-wrapper {
+  flex: 1 0 300px;
+}
+
+.recipe-item {
+  position: relative;
+  display: inline-block;
+}
+
+.recipe-link {
+  text-decoration: none;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.recipe-image {
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  display: block;
+  border-radius: 5px;
+}
+
+.image-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.heart.full {
+  color: red;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  padding-bottom: 30px;
+
+  .mat-paginator {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .mat-paginator-range-label,
+    .mat-paginator-page-size {
+      color: #333;
+    }
+
+    .mat-paginator-navigation {
+      button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        outline: none;
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+
+        &[disabled] {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .recipes-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+  }
+
+  .recipe-item-wrapper {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+
+  .recipe-image {
+    max-height: 200px;
+  }
+
+  .recipes-title {
+    font-size: 20px;
+  }
+
+  .paginator {
+    padding-bottom: 20px;
+  }
+
+  .paginator .mat-paginator {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-image {
+    max-height: 150px;
+  }
+
+  .image-title {
+    font-size: 14px;
+    padding: 3px 5px;
+  }
+
+  .heart {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="navbar">
+    <div class="navbar-left">
+      <a routerLink="/home-page" class="nav-link">Delicii</a>
+     <!-- <a routerLink="/success" class="nav-link">Success</a> -->
+      <a routerLink="/payment" class="nav-link" *ngIf="authService.userRole() === 'User' || authService.userRole() === 'Admin'">Premium</a>
+    </div>
+    <div class="navbar-right">
+     <!-- <a routerLink="/recipes" class="nav-link">Recipes</a> -->
+      <a routerLink="/extract-recipe" class="nav-link" *ngIf="authService.userRole() === 'Admin'">Extract Recipe</a>
+     <!-- <a routerLink="/search-ingredients" class="nav-link">Search Ingredients</a> -->
+     <!-- <a routerLink="/advanced-search" class="nav-link">Advanced Search</a> -->
+     <!-- <a routerLink="/dishgen" class="nav-link">Dishgen</a> -->
+      <a routerLink="/add" class="nav-link" *ngIf="authService.userRole() === 'User' || authService.userRole() === 'Admin' || authService.userRole() === 'Premium'">Add</a>
+      <a routerLink="/favorite" class="nav-link" *ngIf="authService.userRole() === 'User' || authService.userRole() === 'Admin' || authService.userRole() === 'Premium'">Favorite</a>
+      <a routerLink="/recipe-under-review" class="nav-link" *ngIf="authService.userRole() === 'Admin'">ReviewRecipe</a>
+     <!-- <a routerLink="/add-recipe-detail" class="nav-link">Added</a> -->
+      
+      <app-dropdown-menu></app-dropdown-menu>
+      
+      <ng-container *ngIf="authService.isLoggedIn(); else loggedOutTemplate">
+        <button (click)="onLogout()" class="nav-link btn-style">Logout</button>
+      </ng-container>
+      <ng-template #loggedOutTemplate>
+        <a routerLink="/login" class="nav-link">Login</a>
+      </ng-template>
+      
+    </div>
+  </div>

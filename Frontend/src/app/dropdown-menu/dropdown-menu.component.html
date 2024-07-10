@@ -1,0 +1,27 @@
+<div class="navbar">
+
+    <div class="navbar-right">
+      <div class="dropdown">
+        <button class="dropbtn">Recipe
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <!--<a routerLink="/recipes" class="nav-link">Recipes</a> -->
+          <a routerLink="/add-recipe-detail" class="nav-link">Added</a>
+          <a routerLink="/dishgen" class="nav-link">Dishgen</a>
+        </div>
+      </div>
+  
+      <div class="dropdown">
+        <button class="dropbtn">Search 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a routerLink="/search-ingredients" class="nav-link" *ngIf="authService.userRole() === 'User' || authService.userRole() === 'Admin' || authService.userRole() === 'Premium'">Search Ingredients</a>
+          <a routerLink="/advanced-search" class="nav-link" *ngIf="authService.userRole() === 'User' || authService.userRole() === 'Admin' || authService.userRole() === 'Premium'">Advanced Search</a> 
+          <a routerLink="/recipes" class="nav-link"*ngIf="authService.userRole() === 'User' || authService.userRole() === 'Admin' || authService.userRole() === 'Premium'">Recipes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

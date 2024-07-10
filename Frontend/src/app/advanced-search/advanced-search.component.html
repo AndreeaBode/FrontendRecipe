@@ -1,0 +1,87 @@
+<div class="background">
+  <div class="a">
+    <h1>Recipe Component</h1>
+
+    <label for="searchTerm">Search Term:</label>
+    <input type="text" id="searchTerm" [(ngModel)]="searchTerm" placeholder="Enter search term">
+
+    <label for="diet">Diet:</label>
+    <input type="text" id="diet" [(ngModel)]="diet" placeholder="Enter diet">
+
+    <label for="intolerances">Intolerances:</label>
+    <input type="text" id="intolerances" [(ngModel)]="intolerances" placeholder="Enter intolerances">
+
+    <label for="includeIngredients">Include Ingredients:</label>
+    <input type="text" id="includeIngredients" [(ngModel)]="includeIngredients" placeholder="Include ingredients">
+
+    <label for="excludeIngredients">Exclude Ingredients:</label>
+    <input type="text" id="excludeIngredients" [(ngModel)]="excludeIngredients" placeholder="Exclude ingredients">
+
+    <label for="maxReadyTime">Max Ready Time (min):</label>
+    <input type="number" id="maxReadyTime" [(ngModel)]="maxReadyTime" placeholder="Max Ready Time (min)">
+
+    <label for="minCarbs">Min Carbs (g):</label>
+    <input type="number" id="minCarbs" [(ngModel)]="minCarbs" placeholder="Min Carbs (g)">
+
+    <label for="maxCarbs">Max Carbs (g):</label>
+    <input type="number" id="maxCarbs" [(ngModel)]="maxCarbs" placeholder="Max Carbs (g)">
+
+    <label for="minProtein">Min Protein (g):</label>
+    <input type="number" id="minProtein" [(ngModel)]="minProtein" placeholder="Min Protein (g)">
+
+    <label for="maxProtein">Max Protein (g):</label>
+    <input type="number" id="maxProtein" [(ngModel)]="maxProtein" placeholder="Max Protein (g)">
+
+    <label for="minCalories">Min Calories:</label>
+    <input type="number" id="minCalories" [(ngModel)]="minCalories" placeholder="Min Calories">
+
+    <label for="maxCalories">Max Calories:</label>
+    <input type="number" id="maxCalories" [(ngModel)]="maxCalories" placeholder="Max Calories">
+
+    <label for="minFat">Min Fat (g):</label>
+    <input type="number" id="minFat" [(ngModel)]="minFat" placeholder="Min Fat (g)">
+
+    <label for="maxFat">Max Fat (g):</label>
+    <input type="number" id="maxFat" [(ngModel)]="maxFat" placeholder="Max Fat (g)">
+
+    <label for="minCholesterol">Min Cholesterol (mg):</label>
+    <input type="number" id="minCholesterol" [(ngModel)]="minCholesterol" placeholder="Min Cholesterol (mg)">
+
+    <label for="maxCholesterol">Max Cholesterol (mg):</label>
+    <input type="number" id="maxCholesterol" [(ngModel)]="maxCholesterol" placeholder="Max Cholesterol (mg)">
+
+    <label for="minSugar">Min Sugar (g):</label>
+    <input type="number" id="minSugar" [(ngModel)]="minSugar" placeholder="Min Sugar (g)">
+
+    <label for="maxSugar">Max Sugar (g):</label>
+    <input type="number" id="maxSugar" [(ngModel)]="maxSugar" placeholder="Max Sugar (g)">
+
+    <button (click)="searchFoodAdvanced({
+      query: searchTerm, diet: diet, intolerances: intolerances, includeIngredients: includeIngredients, excludeIngredients: excludeIngredients,
+      maxReadyTime: maxReadyTime, minCarbs: minCarbs, maxCarbs: maxCarbs, minProtein: minProtein, maxProtein: maxProtein, minCalories: minCalories,
+      maxCalories: maxCalories, minFat: minFat, maxFat: maxFat, minCholesterol: minCholesterol, maxCholesterol: maxCholesterol, minSugar: minSugar, maxSugar: maxSugar
+    })" class="button">Search</button>
+
+  </div>
+
+  <div class="recipe-container">
+    <div *ngFor="let recipe of searchResult" class="recipe-item">
+      <div class="image-container">
+        <h3>{{ recipe.title }}</h3>
+        <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+          <i class="fas fa-heart"></i>
+        </span>
+        <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+          <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="paymentUrl">
+    <p>Click below to proceed with payment:</p>
+    <a class="btn btn-primary" href="{{ paymentUrl }}" target="_blank">Proceed to Payment</a>
+</div>
+
+
+</div>

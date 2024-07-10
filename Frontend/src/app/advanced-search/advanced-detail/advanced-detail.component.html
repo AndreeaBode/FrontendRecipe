@@ -1,0 +1,67 @@
+<div *ngIf="recipe" class="recipe-container">
+  <h1 class="recipe-title">{{ recipe.title }}</h1>
+  
+  <div class="recipe-content">
+    <div class="recipe-image">
+      <img [src]="recipe.image" alt="{{ recipe.title }}">
+    </div>
+
+    <div class="recipe-summary">
+      <div class="summary"> {{ recipe.summary }}</div>
+    </div>
+  </div>
+
+  <div class="recipe-details-container">
+    <div class="recipe-details">
+      <div class="text">
+      <p><b>Ready in minutes:</b> {{ recipe.readyInMinutes }}</p>
+      <p><b>Servings:</b> {{ recipe.servings }}</p>
+</div>
+      <div class="ingredients-instructions">
+        <div class="ingredients">
+          <div class="title-ing">Ingredients:</div>
+          <div class="box">
+            <ul>
+              <li *ngFor="let ingredient of recipe.extendedIngredients">
+                {{ ingredient.original }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="instructions">
+          <div class="title-ing">Instructions:</div>
+          <div class="box">
+            <ol>
+              <li *ngFor="let step of recipe.analyzedInstructions[0]?.steps">
+                {{ step.step }}
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="recipe && nutritionData" class="nutrition-info">
+    <div class="nutrient-list">
+      <h3>Good Nutrients:</h3>
+      <ul>
+        <li *ngFor="let nutrient of nutritionData.good">
+          {{ nutrient.title }}: {{ nutrient.amount }} <br>
+          <div class = "percent" >Percent of daily needs: {{ nutrient.percentOfDailyNeeds }}%</div>
+        </li>
+      </ul>
+    </div>
+    <div class="nutrient-list">
+      <h3>Bad Nutrients:</h3>
+      <ul>
+        <li *ngFor="let nutrient of nutritionData.bad">
+          {{ nutrient.title }}: {{ nutrient.amount }} <br>
+          <div class = "percent" >Percent of daily needs: {{ nutrient.percentOfDailyNeeds }}%</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

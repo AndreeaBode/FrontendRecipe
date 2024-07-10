@@ -1,0 +1,115 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  height: 40px;
+  background-color: black;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); 
+  position: relative;
+  z-index: 100; 
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+
+    .nav-link {
+      color: white; 
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 18px; 
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+
+    .search-bar {
+      height: 20px;
+      padding: 3px 8px;
+      font-size: 14px;
+    }
+
+    .nav-link {
+      color: white; 
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 18px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .nav-divider {
+      margin: 0 10px;
+      color: white;
+    }
+
+    .btn-style {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      color:white;
+    }
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+
+    .dropbtn {
+      font-size: 16px;  
+      border: none;
+      outline: none;
+      color: white;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+    }
+  }
+
+  a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000; 
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+}
+

@@ -1,0 +1,13 @@
+<div class="background">
+  <div class="recipes-container">
+    <div *ngFor="let recipe of pagedRecipes" class="recipe-card">
+      <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+        <img [src]="recipe.image" alt="Recipe Image" class="recipe-image">
+        <h2>{{ recipe.title }}</h2>
+      </a>
+      <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+        <i class="fas fa-heart"></i>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="background">
+  <div class="recipe-component">
+    <h1 class="recipes-title">Search</h1>
+
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term" class="search-input">
+
+    <button (click)="searchFood(searchTerm)" class="search-button">Search</button>
+    <button (click)="getRandomRecipes()" class="random-recipes-button">Get Random Recipes</button>
+   
+    <div class="recipes-container">
+      <div *ngIf="searchResult && searchResult.length" class="search-results">
+        <div *ngFor="let recipe of searchResult" class="recipe-item-wrapper">
+          <div class="recipe-image-container">
+            <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+              <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+                <span class="image-title">{{ recipe.title }}</span>
+            </a>
+            <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+              <i class="fas fa-heart"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="randomRecipes && randomRecipes.length" class="random-recipes">
+      <h2>Random Recipes</h2>
+      <ul class="recipe-list">
+        <li *ngFor="let recipe of randomRecipes" class="recipe-item">
+          <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+            <div class="recipe-image-container">
+              <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+              <div class="overlay">
+                <span class="image-title">{{ recipe.title }}</span>
+                <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+                  <i class="fas fa-heart"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <div class="background">
+          <div class="recipe-component">
+            <h1 class="recipes-title">Search</h1>
+
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term" class="search-input">
+            <button (click)="searchFood(searchTerm)" class="search-button">Search</button>
+            <button (click)="getRandomRecipes()" class="random-recipes-button">Get Random Recipes</button>
+
+            <div class="recipes-container">
+              <div *ngIf="searchResult && searchResult.length" class="search-results">
+                <div class="recipe-item-wrapper" *ngFor="let recipe of searchResult">
+                  <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+                    <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+                    <span class="image-title">{{ recipe.title }}</span>
+                    <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+                      <i class="fas fa-heart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="randomRecipes && randomRecipes.length" class="random-recipes">
+              <h2>Random Recipes</h2>
+              <div class="recipe-list">
+                <div class="recipe-item" *ngFor="let recipe of randomRecipes">
+                  <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+                    <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+                    <span class="image-title">{{ recipe.title }}</span>
+                    <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+                      <i class="fas fa-heart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

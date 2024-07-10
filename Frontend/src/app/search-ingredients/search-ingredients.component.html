@@ -1,0 +1,45 @@
+<div class="background">
+  <h1>Search Recipes by Ingredients</h1>
+  <div class="form">
+    <label for="ingredients">Ingredients:</label>
+    <input type="text" id="ingredients" [(ngModel)]="ingredients" placeholder="Enter ingredients...">
+    <br>
+  
+    <button (click)="searchByIngredients()">Search Recipes</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="form">
+    <p class="error-message">{{ errorMessage }}</p>
+  </div>
+
+  <div class="recipe-container">
+    <div *ngFor="let recipe of searchResult" class="recipe">
+      <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+      <h2>{{ recipe.title }}</h2>
+      <img [src]="recipe.image" alt="{{ recipe.title }}" class = "recipe-image" >
+    </a>
+      <div class="ingredients-container">
+        <div class="used-ingredients">
+          <h3>Used Ingredients:</h3>
+          <ul>
+            <li *ngFor="let usedIngredient of recipe.usedIngredients">
+              <img [src]="usedIngredient.image" alt="{{ usedIngredient.name }}" width="50" class = "ingredient-image">
+              {{ usedIngredient.original }}
+            </li>
+          </ul>
+        </div>
+        
+        <div class="missed-ingredients">
+          <h3>Missed Ingredients:</h3>
+          <ul>
+            <li *ngFor="let missedIngredient of recipe.missedIngredients">
+              <img [src]="missedIngredient.image" alt="{{ missedIngredient.name }}" width="50" class = "ingredient-image">
+              {{ missedIngredient.original }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,23 @@
+<div class="background">
+<div *ngIf="recipe" class="recipe-details">
+    <h1>{{ recipe.title }}</h1>
+    <img [src]="recipe.image" alt="{{ recipe.title }}" width="300">
+    <p><b>Ready in minutes:</b> {{ recipe.readyInMinutes }}</p>
+    <p><b>Servings:</b> {{ recipe.servings }}</p>
+    <p><b>Summary:</b> {{ recipe.summary }}</p>
+    <div class="instructions-ingredients">
+    <h2>Ingredients:</h2>
+    <ul>
+      <li *ngFor="let ingredient of recipe.extendedIngredients">
+        {{ ingredient.original }}
+      </li>
+    </ul>
+    <h2>Instructions:</h2>
+    <ol>
+      <li *ngFor="let step of recipe.analyzedInstructions[0]?.steps">
+        {{ step.step }}
+      </li>
+    </ol>
+    <p><b>Source:</b> <a [href]="recipe.sourceUrl">{{ recipe.sourceName }}</a></p>
+  </div></div>
+</div>

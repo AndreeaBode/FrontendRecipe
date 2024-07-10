@@ -1,0 +1,48 @@
+<div class="background">
+  <div class="extract-recipe">
+    <div class="extract-container">
+      <h1>Extract Recipe</h1>
+      <input type="text" [(ngModel)]="recipeUrl" placeholder="Enter recipe URL" class="input">
+      <button (click)="extractRecipe(recipeUrl)" class="button">Extract</button>
+    </div>
+    <div class="all">
+      <div class="recipe">
+        <h1>{{ recipeDetails.title }}</h1>
+        <img [src]="recipeDetails.image" alt="{{ recipeDetails.title }}" width="300" class="recipe-image">
+      </div>
+
+      <div class="recipe-content">
+        <div class="ingredients-section"
+          *ngIf="recipeDetails.extendedIngredients && recipeDetails.extendedIngredients.length > 0">
+          <h2>Ingredients:</h2>
+          <div class="ingredients-list">
+            <ol>
+              <li *ngFor="let ingredient of recipeDetails.extendedIngredients">
+                {{ ingredient.original }}
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="instructions-section"
+          *ngIf="recipeDetails.analyzedInstructions && recipeDetails.analyzedInstructions.length > 0">
+          <h2>Instructions:</h2>
+          <div class="instructions-list">
+            <ol>
+              <li *ngFor="let step of recipeDetails.analyzedInstructions[0]?.steps">
+                {{ step.step }}
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="additional-info" *ngIf="showInfo">
+          <p><b>Dish Types:</b> {{ getDishTypes() }}</p>
+          <p><b>Diets:</b> {{ getDiets() }}</p>
+          <p><b>Protein:</b> {{ getProteinPercentage() }}%</p>
+          <p><b>Fat:</b> {{ getFatPercentage() }}%</p>
+          <p><b>Carbs:</b> {{ getCarbsPercentage() }}%</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="background">
+
+  <h1 class="recipes-title">All Recipes</h1>
+
+  <div class="recipes-container">
+    <div *ngFor="let recipe of pagedRecipes" class="recipe-item-wrapper">
+      <div class="recipe-item">
+        <a (click)="showRecipeDetails(recipe.id)" class="recipe-link">
+          <img [src]="recipe.image" alt="Recipe Image" class="recipe-image">
+          <span class="image-title">{{ recipe.title }}</span>
+        </a>
+        <span class="heart" [class.full]="recipe.isLoved" (click)="toggleLike(recipe)">
+          <i class="fas fa-heart"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="paginator">
+    <mat-paginator [length]="recipes.length" [pageSize]="16" (page)="onPageChange($event)"></mat-paginator>
+  </div>
+
+</div>
