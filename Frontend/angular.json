@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Delicii": {
+    "Ass": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,7 +21,7 @@
               "path": "./webpack.config.js",
               "replaceDuplicatePlugins": true
             },
-            "outputPath": "dist/",
+            "outputPath": "dist/ass",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Delicii:build:production"
+              "browserTarget": "Ass:build:production"
             },
             "development": {
-              "browserTarget": "Delicii:build:development"
+              "browserTarget": "Ass:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Delicii:build"
+            "browserTarget": "Ass:build"
           }
         },
         "test": {
