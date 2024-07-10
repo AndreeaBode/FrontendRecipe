@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
   reviews: any[] = [];
   newReview: any = { rating: 0 };
   isReviewed: boolean = false;
-  ingredients: any[] = []; 
+  ingredients: any[] = [];
   prediction: any;
   errorMessage: string = '';
   isAuthenticated: boolean = false;
@@ -32,15 +32,13 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private predictionService: PredictionService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const recipeId = +this.route.snapshot.paramMap.get('id')!;
     if (recipeId) {
       const sourcePage = this.route.snapshot.paramMap.get('sourcePage');
-
       this.name = sourcePage ?? '';
-
       this.loading = true;
 
       if (sourcePage === 'addedRecipe') {
@@ -48,7 +46,6 @@ export class DetailsComponent implements OnInit {
           (recipe: any) => {
             this.recipe = recipe;
             this.loading = false;
-            console.log("RES0 ", recipe);
             this.extractIngredients();
             this.getPrediction();
           },
@@ -79,52 +76,44 @@ export class DetailsComponent implements OnInit {
             this.getPrediction();
           },
           (error) => {
-            console.error('Eroare la obținerea detaliilor rețetei:', error);
+            console.error('Error getting recipe details:', error);
           }
         );
       }
-
     } else {
-      console.error('Nu se poate obtine ID-ul retetei.');
+      console.error('Cannot obtain recipe ID.');
     }
 
     this.isAuthenticated = this.authService.isLoggedIn();
     this.getComments();
     this.getReviews();
     this.addOrUpdateReview();
- 
   }
-
 
   extractIngredients(): void {
     if (this.recipe && this.recipe.ingredients) {
       this.ingredients = this.recipe.ingredients.map((ingredient: any) => ingredient.ingredient);
-      console.log("Extracted Ingredients:", this.ingredients);
+      console.log('Extracted Ingredients:', this.ingredients);
     }
   }
 
   getPrediction(): void {
-    this.predictionService.getPrediction(this.ingredients)
-      .subscribe(
-        data => {
-          console.log("Ingredients ", this.ingredients);
-          
-          if (data.prediction && data.prediction.length === 1 && data.prediction[0].length === 0) {
-            this.prediction = null;
-            this.errorMessage = 'SORRY, but we have a small problem! Please come back!';
-          } else {
-            this.prediction = data.prediction;
-          }
-          
-          console.log('Prediction:', this.prediction);
-        },
-        error => {
-          console.error('There was an error!', error);
-          this.errorMessage = 'SORRY, but we have a small problem! please come back'; 
+    this.predictionService.getPrediction(this.ingredients).subscribe(
+      (data) => {
+        if (data.prediction && data.prediction.length === 1 && data.prediction[0].length === 0) {
+          this.prediction = null;
+          this.errorMessage = 'SORRY, but we have a small problem! Please come back!';
+        } else {
+          this.prediction = data.prediction;
         }
-      );
+        console.log('Prediction:', this.prediction);
+      },
+      (error) => {
+        console.error('There was an error!', error);
+        this.errorMessage = 'SORRY, but we have a small problem! please come back';
+      }
+    );
   }
-  
 
   toggleLike(recipe: any): void {
     const userId = this.authService.userId();
@@ -133,14 +122,10 @@ export class DetailsComponent implements OnInit {
     }
 
     const recipeId = recipe.id;
-    console.log("1ID  ", recipeId);
     const name = this.name;
-    console.log("1N  ", name);
+    this.isLoved = !this.isLoved;
 
-    console.log("LOVEEEEE", recipe.isLoved);
-    recipe.isLoved = !recipe.isLoved;
-
-    if (recipe.isLoved) {
+    if (this.isLoved) {
       this.saveLikeToDatabase(userId, recipeId, name);
     } else {
       this.deleteLikeFromDatabase(userId, recipeId, name);
@@ -149,30 +134,30 @@ export class DetailsComponent implements OnInit {
 
   saveLikeToDatabase(userId: number, recipeId: number, name: string): void {
     this.recipeService.saveLike(userId, recipeId, name).subscribe(
-      response => {
-        console.log('Datele au fost salvate cu succes în baza de date!');
+      (response) => {
+        console.log('Data successfully saved to the database!');
       },
-      error => {
-        console.error('Eroare la salvarea datelor în baza de date:', error);
+      (error) => {
+        console.error('Error saving data to the database:', error);
       }
     );
   }
 
   deleteLikeFromDatabase(userId: number, recipeId: number, name: string): void {
     this.recipeService.deleteLike(userId, recipeId, name).subscribe(
-      response => {
-        console.log('Datele au fost șterse cu succes din baza de date!');
+      (response) => {
+        console.log('Data successfully deleted from the database!');
       },
-      error => {
-        console.error('Eroare la ștergerea datelor din baza de date:', error);
+      (error) => {
+        console.error('Error deleting data from the database:', error);
       }
     );
   }
 
-  getComments() {
+  getComments(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? +idParam : 0;
-    const urlParts = this.route.snapshot.url.map(segment => segment.path);
+    const urlParts = this.route.snapshot.url.map((segment) => segment.path);
     const username = this.authService.username();
 
     let additionalPath = '';
@@ -180,17 +165,17 @@ export class DetailsComponent implements OnInit {
       additionalPath = urlParts[2];
     }
     if (id) {
-      this.recipeService.getCommentsByRecipeId(username, id, additionalPath)?.subscribe(comments => {
+      this.recipeService.getCommentsByRecipeId(username, id, additionalPath)?.subscribe((comments) => {
         this.comments = comments;
       });
     }
   }
 
-  addComment() {
+  addComment(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? +idParam : 0;
     const userId = this.authService.userId();
-    const urlParts = this.route.snapshot.url.map(segment => segment.path);
+    const urlParts = this.route.snapshot.url.map((segment) => segment.path);
     const username = this.authService.username();
 
     let additionalPath = '';
@@ -199,7 +184,7 @@ export class DetailsComponent implements OnInit {
     }
 
     if (id) {
-      this.recipeService.addCommentToRecipe(id, userId, username, { content: this.newComment }, additionalPath)?.subscribe(comment => {
+      this.recipeService.addCommentToRecipe(id, userId, username, { content: this.newComment }, additionalPath)?.subscribe((comment) => {
         this.comments.push(comment);
         this.newComment = '';
         location.reload();
@@ -210,9 +195,8 @@ export class DetailsComponent implements OnInit {
   getReviews(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? +idParam : 0;
-
     const userId = this.authService.userId();
-    const urlParts = this.route.snapshot.url.map(segment => segment.path);
+    const urlParts = this.route.snapshot.url.map((segment) => segment.path);
     const username = this.authService.username();
 
     let additionalPath = '';
@@ -221,7 +205,7 @@ export class DetailsComponent implements OnInit {
     }
 
     if (id) {
-      this.recipeService.getReviewsByRecipeId(username, id, additionalPath)?.subscribe(reviews => {
+      this.recipeService.getReviewsByRecipeId(username, id, additionalPath)?.subscribe((reviews) => {
         this.reviews = reviews;
       });
     }
@@ -230,9 +214,8 @@ export class DetailsComponent implements OnInit {
   addReview(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? +idParam : 0;
-
     const userId = this.authService.userId();
-    const urlParts = this.route.snapshot.url.map(segment => segment.path);
+    const urlParts = this.route.snapshot.url.map((segment) => segment.path);
     const username = this.authService.username();
 
     let additionalPath = '';
@@ -241,7 +224,7 @@ export class DetailsComponent implements OnInit {
     }
 
     if (id) {
-      this.recipeService.addReviewToRecipe(id, this.newReview, userId, username, additionalPath)?.subscribe(review => {
+      this.recipeService.addReviewToRecipe(id, this.newReview, userId, username, additionalPath)?.subscribe((review) => {
         this.reviews.push(review);
         this.newReview = { rating: 0 };
         location.reload();
@@ -266,29 +249,24 @@ export class DetailsComponent implements OnInit {
       return 'N/A';
     }
 
-    const ratings = this.reviews
-      .filter(review => review !== null)
-      .map(review => parseInt(review.rating, 10));
+    const ratings = this.reviews.filter((review) => review !== null).map((review) => parseInt(review.rating, 10));
 
-    const allRatingsValid = ratings.every(rating => !isNaN(rating) && Number.isInteger(rating));
+    const allRatingsValid = ratings.every((rating) => !isNaN(rating) && Number.isInteger(rating));
 
     if (!allRatingsValid) {
       return 'N/A';
     }
 
     const sum = ratings.reduce((acc, rating) => acc + rating, 0);
-
     const average = sum / ratings.length;
-
     return average.toFixed(2);
   }
 
-  addOrUpdateReview() {
+  addOrUpdateReview(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? +idParam : 0;
-
     const userId = this.authService.userId();
-    const urlParts = this.route.snapshot.url.map(segment => segment.path);
+    const urlParts = this.route.snapshot.url.map((segment) => segment.path);
     const username = this.authService.username();
 
     let additionalPath = '';
@@ -297,7 +275,7 @@ export class DetailsComponent implements OnInit {
     }
 
     if (id) {
-      this.recipeService.checkReview(userId, id, additionalPath)?.subscribe(response => {
+      this.recipeService.checkReview(userId, id, additionalPath)?.subscribe((response) => {
         if (response) {
           this.isReviewed = true;
           this.reviewsUpdate = [response];
@@ -308,36 +286,30 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  updateRating(newRating: number) {
+  updateRating(newRating: number): void {
     if (this.reviewsUpdate.length > 0) {
       this.reviewsUpdate[0].rating = newRating;
       this.newReview.rating = newRating.toString();
     }
   }
 
-updateReview(): void {
-  const idParam = this.route.snapshot.paramMap.get('id');
-  const id = idParam ? +idParam : 0;
+  updateReview(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    const id = idParam ? +idParam : 0;
+    const userId = this.authService.userId();
+    const urlParts = this.route.snapshot.url.map((segment) => segment.path);
+    const username = this.authService.username();
 
-  const userId = this.authService.userId();
-  const urlParts = this.route.snapshot.url.map(segment => segment.path);
-  const username = this.authService.username();
+    let additionalPath = '';
+    console.log("");
+    if (urlParts.length > 1) {
+      additionalPath = urlParts[2];
+    }
 
-  let additionalPath = '';
-
-  if (urlParts.length > 1) {
-    additionalPath = urlParts[2];
-  }
-
-
-  if (id) {
-
-    this.recipeService.updateReviewOfRecipe(id, this.newReview, userId, username, additionalPath)?.subscribe(updatedReview => {
-      location.reload();
-    });
+    if (id) {
+      this.recipeService.updateReviewOfRecipe(id, this.newReview, userId, username, additionalPath)?.subscribe((updatedReview) => {
+        location.reload();
+      });
+    }
   }
 }
-
-
-
-}  
