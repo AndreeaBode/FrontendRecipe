@@ -9,11 +9,11 @@
   font-size: 24px;
   cursor: pointer;
   transition: color 0.3s ease;
-  color: black; /* default color */
+  color: black;
 }
 
 .heart.full {
-  color: red; /* color when liked */
+  color: red; 
 }
 
 .rating {

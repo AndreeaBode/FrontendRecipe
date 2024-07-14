@@ -29,15 +29,15 @@ const routes: Routes = [
   { path: 'search-ingredients', component: SearchIngredientsComponent, canActivate: [AuthGuard], data: { roles: ['Admin','User', 'Premium'] } },
   { path: 'advanced-search', component: AdvancedSearchComponent, canActivate: [AuthGuard], data: { roles: ['Admin','User', 'Premium'] } },
   { path: 'advanced-detail/:id', component: AdvancedDetailComponent, },
-  { path: 'dishgen', component: RecipeDishgenComponent }, // Acces liber pentru toți
+  { path: 'dishgen', component: RecipeDishgenComponent },
   { path: 'favorite', component: FavoriteComponent, canActivate: [AuthGuard], data: { roles: ['Admin','User', 'Premium'] } },
   { path: 'add', component: AddRecipeComponent, canActivate: [AuthGuard], data: { roles: ['Admin','User', 'Premium'] } },
-  { path: 'add-recipe-detail', component: AddedRecipeDetailComponent }, // Acces liber pentru toți
+  { path: 'add-recipe-detail', component: AddedRecipeDetailComponent }, 
   { path: 'recipe-under-review', component: RecipeUnderReviewComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'search-words', component: SearchWordsComponent },
-  { path: 'details/:id/:sourcePage', component: DetailsComponent }, // Acces liber pentru toți
-  { path: 'payment', component: PaymentComponent }, // Acces liber pentru toți
-  { path: 'success', component: SuccessComponent }, // Acces liber pentru toți
+  { path: 'details/:id/:sourcePage', component: DetailsComponent }, 
+  { path: 'payment', component: PaymentComponent }, 
+  { path: 'success', component: SuccessComponent }, 
 ];
 
 @NgModule({

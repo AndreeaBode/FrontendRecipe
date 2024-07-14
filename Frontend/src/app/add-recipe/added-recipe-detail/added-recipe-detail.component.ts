@@ -29,7 +29,7 @@ export class AddedRecipeDetailComponent implements OnInit {
         this.recipes = response;
         this.recipes.forEach(recipe => {
           console.log("D", recipe);
-          this.checkIfLiked(recipe); //76
+          this.checkIfLiked(recipe); 
         });
       },
       (error) => {
@@ -44,7 +44,7 @@ export class AddedRecipeDetailComponent implements OnInit {
 
     this.recipeService.checkIfLiked(userId, recipeId).subscribe(
       response => {
-        recipe.isLoved = response; // Actualizăm starea inimii pentru rețeta curentă
+        recipe.isLoved = response; 
       },
       error => {
         console.error('Error checking if liked:', error);
@@ -52,47 +52,7 @@ export class AddedRecipeDetailComponent implements OnInit {
     );
   }
 
- /* toggleLike(recipe: any): void {
-    const userId = this.authService.userId();
-    if (!userId) {
-      // Nu putem adăuga sau șterge like-ul fără un utilizator autentificat
-      return;
-    }
 
-    const recipeId = recipe.id;
-    const name = "added_recipes";
-    console.log(name);
-    recipe.isLoved = !recipe.isLoved;
-
-    if (recipe.isLoved) {
-      this.saveLikeToDatabase(userId, recipeId, name); 
-    } else { 
-      this.deleteLikeFromDatabase(userId, recipeId, name); 
-    }
-  }
-
-  saveLikeToDatabase(userId: number, recipeId: number, name: string): void {
-    this.recipeService.saveLike(userId, recipeId, name).subscribe(
-      response => {
-        console.log('Datele au fost salvate cu succes în baza de date!');
-      },
-      error => {
-        console.error('Eroare la salvarea datelor în baza de date:', error);
-      }
-    );
-  }
-  
-  deleteLikeFromDatabase(userId: number, recipeId: number, name: string): void {
-    this.recipeService.deleteLike(userId, recipeId, name).subscribe(
-      response => {
-        console.log('Datele au fost șterse cu succes din baza de date!');
-      },
-      error => {
-        console.error('Eroare la ștergerea datelor din baza de date:', error);
-      }
-    );
-  }
-*/
   showRecipeDetails(id: number): void {
     this.router.navigate(['/details', id, 'addedRecipe']);
   }

@@ -15,7 +15,7 @@ export class SuccessComponent implements OnInit {
 
   userId: number = 0;
   successMessage: string = '';
-  private isUpgraded: boolean = false; // Add a flag to prevent multiple requests
+  private isUpgraded: boolean = false; 
   private isUpgradeInProgress: boolean = false; 
 
   constructor(private premiumService: PaymentService, private authService: AuthService) {}
