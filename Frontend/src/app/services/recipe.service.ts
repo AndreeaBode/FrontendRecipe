@@ -94,7 +94,7 @@ export class RecipeService {
 
 
   submitRecipe(recipe: Recipe): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'text' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
 
     const payload = {
@@ -105,7 +105,7 @@ export class RecipeService {
     };
   
     console.log("z" + payload);
-    return this.http.post<any>(`${this.backendUrl}/submit`, payload, { headers });
+    return this.http.post<any>(`${this.backendUrl}/submit`, payload, { headers,responseType: 'text' as 'json' });
   }
   
   saveLike(userId: number, recipeId: number, name: string): Observable<any> {
