@@ -22,17 +22,21 @@ export class AddRecipeComponent {
       alert('Te rugăm să completezi titlul și imaginea rețetei.');
       return;
     }
-
+  
     const recipe = new Recipe(this.recipe.title, this.recipe.image, this.recipe.ingredients, this.recipe.instructions);
     console.log("A", recipe);
-
+  
     this.recipeService.submitRecipe(recipe)
       .subscribe(
-        () => {
-          this.toastr.success('Rețetă adăugată cu succes!', 'Succes');
-          this.resetForm();
-          this.newIngredient = '';
-          this.newInstruction = '';
+        (response: any) => {
+          if (response.status === 201) {
+            this.toastr.success('Rețetă adăugată cu succes!', 'Succes');
+            this.resetForm();
+            this.newIngredient = '';
+            this.newInstruction = '';
+          } else {
+            this.toastr.error('Eroare la adăugarea rețetei. Te rugăm să încerci din nou mai târziu.', 'Eroare');
+          }
         },
         (error: any) => {
           console.error('Eroare la adăugarea rețetei:', error);
@@ -40,6 +44,7 @@ export class AddRecipeComponent {
         }
       );
   }
+  
 
   resetForm(): void {
     this.recipe = new Recipe('', '', [], []); 
