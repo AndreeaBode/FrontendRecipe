@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
           password: this.password
         };
 
-        this.http.post('http://localhost:8080/login', loginData).subscribe(
+        this.http.post('https://backendrecipe-production.up.railway.app//login', loginData).subscribe(
           (response: any) => {
             if (response && response.token) {
               localStorage.setItem('jwtToken', response.token);

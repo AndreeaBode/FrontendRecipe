@@ -11,8 +11,8 @@ import { Recipe } from '../models/recipe';
   providedIn: 'root'
 })
 export class RecipeService {
-  private backendUrl = 'http://localhost:8080'; 
-  private backendUrl2 = 'http://localhost:8080/export'; 
+  private backendUrl = 'hhttps://backendrecipe-production.up.railway.app'; 
+  private backendUrl2 = 'https://backendrecipe-production.up.railway.app/export'; 
   private cachedResults: any[] = [];
 
   constructor(private http: HttpClient) {}
@@ -171,7 +171,7 @@ export class RecipeService {
 
 email(email: string) {
   const headers = new HttpHeaders({ 'Content-Type': 'text/plain' });
-  return this.http.post('http://localhost:8080/s', email, { responseType: 'text' });
+  return this.http.post('https://backendrecipe-production.up.railway.app/s', email, { responseType: 'text' });
 }
   exportData(): Observable<string> {
     return this.http.get<string>(this.backendUrl2, { responseType: 'text' as 'json' });

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PaymentService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'https://backendrecipe-production.up.railway.app';
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class PaymentService {
   }
 
   createCheckoutSession(userId: number): Observable<any> {
-    const url = `http://localhost:8080/payment/create-checkout-session?userId=${userId}`;
+    const url = `https://backendrecipe-production.up.railway.app/create-checkout-session?userId=${userId}`;
     return this.http.post<any>(url, {});
   }
   

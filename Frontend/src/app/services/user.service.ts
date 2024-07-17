@@ -9,7 +9,7 @@ import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private userUrl = 'http://localhost:8080';  
+  private userUrl = 'https://backendrecipe-production.up.railway.app';  
   private deviceUrl = 'http://localhost:8081/device';
 
   httpOptions = {
