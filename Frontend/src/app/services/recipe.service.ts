@@ -11,7 +11,7 @@ import { Recipe } from '../models/recipe';
   providedIn: 'root'
 })
 export class RecipeService {
-  private backendUrl = 'hhttps://backendrecipe-production.up.railway.app'; 
+  private backendUrl = 'https://backendrecipe-production.up.railway.app'; 
   private backendUrl2 = 'https://backendrecipe-production.up.railway.app/export'; 
   private cachedResults: any[] = [];
 
