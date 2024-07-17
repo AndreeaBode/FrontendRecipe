@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { SearchFoodOptions } from '../search-food-options';
 import { HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import { Recipe } from '../models/recipe';
-import { HttpResponse } from '@angular/common/http';
 
 
 
@@ -78,7 +77,7 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe): Observable<any> {
-    //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
     const payload = {
       title: recipe.title,
@@ -94,20 +93,20 @@ export class RecipeService {
 }
 
 
-submitRecipe(recipe: Recipe): Observable<HttpResponse<any>> {
-  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  submitRecipe(recipe: Recipe): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
 
-  const payload = {
-    title: recipe.title,
-    image: recipe.image,
-    ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient),
-    instructions: recipe.instructions.map(instruction => instruction.instruction)
-  };
-
-  console.log("Payload:", payload);
-  return this.http.post<any>(`${this.backendUrl}/submit`, payload, { headers, observe: 'response' });
-}
-
+    const payload = {
+      title: recipe.title,
+      image: recipe.image,
+      ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient),
+      instructions: recipe.instructions.map(instruction => instruction.instruction)
+    };
+  
+    console.log("z" + payload);
+    return this.http.post<any>(`${this.backendUrl}/submit`, payload, { headers });
+  }
   
   saveLike(userId: number, recipeId: number, name: string): Observable<any> {
     console.log("Da2");
