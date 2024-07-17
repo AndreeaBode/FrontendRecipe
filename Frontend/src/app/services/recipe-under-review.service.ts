@@ -20,7 +20,7 @@ export class RecipeUnderReviewService {
 
   deleteRecipe(recipeId: number): Observable<any> {
     const url = `${this.apiUrl}/recipes/delete/under-review/${recipeId}`; 
-    return this.http.delete(url);
+    return this.http.delete(url,{responseType:'text' as 'json'});
   }
   
 }
