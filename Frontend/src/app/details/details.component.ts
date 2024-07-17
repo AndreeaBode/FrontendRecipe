@@ -85,6 +85,8 @@ export class DetailsComponent implements OnInit {
     }
 
     this.isAuthenticated = this.authService.isLoggedIn();
+    console.log("Login", this.isAuthenticated);
+    console.log("Review", this.isReviewed);
     this.getComments();
     this.getReviews();
     this.addOrUpdateReview();

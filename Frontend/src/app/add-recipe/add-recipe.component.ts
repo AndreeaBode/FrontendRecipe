@@ -35,7 +35,7 @@ export class AddRecipeComponent {
             this.newIngredient = '';
             this.newInstruction = '';
           } else {
-            this.toastr.error('Rețetă a fost adăugată cu succes!', 'Succes');
+            this.toastr.error('Eroare la adăugarea rețetei. Te rugăm să încerci din nou mai târziu.', 'Eroare');
           }
         },
         (error: any) => {
