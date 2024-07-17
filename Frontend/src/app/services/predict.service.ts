@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PredictionService {
-  private apiUrl = 'http://backendrecipe-production.up.railway.app:8080/predict'; 
+  private apiUrl = 'http://localhost:8080/predict'; 
 
   constructor(private http: HttpClient) { }
 
