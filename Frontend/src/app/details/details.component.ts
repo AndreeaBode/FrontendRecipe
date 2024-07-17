@@ -227,6 +227,7 @@ export class DetailsComponent implements OnInit {
 
     if (id) {
       this.recipeService.addReviewToRecipe(id, this.newReview, userId, username, additionalPath)?.subscribe((review) => {
+        console.log('call add')
         this.reviews.push(review);
         this.newReview = { rating: 0 };
         location.reload();
