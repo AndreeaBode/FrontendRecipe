@@ -47,7 +47,7 @@ export class RecipeUnderReviewComponent implements OnInit {
     this.recipeUnderReviewService.deleteRecipe(recipeId)
       .subscribe(() => {
         this.loadRecipesUnderReview();
-        window.location.reload();
+        this.removeRecipeFromList(recipeId);
       });
   }
 
@@ -55,10 +55,14 @@ export class RecipeUnderReviewComponent implements OnInit {
     this.recipeUnderReviewService.deleteRecipe(recipeId)
       .subscribe(() => {
         this.loadRecipesUnderReview();
-        window.location.reload();
+        this.removeRecipeFromList(recipeId);
       });
   }
 
+  
+  removeRecipeFromList(recipeId: number): void {
+    this.recipes = this.recipes.filter(r => r.id !== recipeId);
+  }
 
   private convertToRecipe(recipeUnderReview: RecipeUnderReview): Recipe {
     console.log("recipeUnderReview", recipeUnderReview);
