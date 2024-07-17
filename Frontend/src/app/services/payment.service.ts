@@ -16,7 +16,7 @@ export class PaymentService {
   }
 
   createCheckoutSession(userId: number): Observable<any> {
-    const url = `https://backendrecipe-production.up.railway.app/create-checkout-session?userId=${userId}`;
+    const url = `https://backendrecipe-production.up.railway.app/payment/create-checkout-session?userId=${userId}`;
     return this.http.post<any>(url, {});
 }
 
