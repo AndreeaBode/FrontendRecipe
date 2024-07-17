@@ -57,6 +57,7 @@ export class RecipeUnderReviewComponent implements OnInit {
       .subscribe(() => {
         this.loadRecipesUnderReview();
         this.cdr.detectChanges();
+        location.reload();
       });
   }
 
