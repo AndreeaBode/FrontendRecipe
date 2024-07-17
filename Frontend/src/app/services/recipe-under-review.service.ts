@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipeUnderReviewService {
-  private apiUrl = 'http://localhost:8080'; 
+  private apiUrl = 'http://backendrecipe-production.up.railway.app:8080'; 
 
   constructor(private http: HttpClient) { }
 
