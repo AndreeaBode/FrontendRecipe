@@ -77,7 +77,7 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
     const payload = {
       title: recipe.title,
@@ -89,7 +89,7 @@ export class RecipeService {
     console.log("Payload: ", payload);
 
     const url = 'https://backendrecipe-production.up.railway.app/add';
-    return this.http.post<any>(url, payload, { headers });
+    return this.http.post<any>(url, payload);
 }
 
 
