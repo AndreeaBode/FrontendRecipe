@@ -82,14 +82,16 @@ export class RecipeService {
     const payload = {
       title: recipe.title,
       image: recipe.image,
-      ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient),
-      instructions: recipe.instructions.map(instruction => instruction.instruction)
+      ingredients: recipe.ingredients,
+      instructions: recipe.instructions
     };
   
-    console.log("z" + payload);
+    console.log("Payload: ", payload);
 
-    return this.http.post<any>(`${this.backendUrl}/add`, payload, { headers });
-  }
+    const url = 'https://backendrecipe-production.up.railway.app/add';
+    return this.http.post<any>(url, payload, { headers });
+}
+
 
   submitRecipe(recipe: Recipe): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
