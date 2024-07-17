@@ -88,6 +88,6 @@ export class RecipeDishgenComponent implements OnInit {
   }
 
   updatePagedRecipes(startIndex: number): void {
-    this.pagedRecipes = this.recipes.slice(startIndex, startIndex + 16);
+    this.pagedRecipes = this.recipes.slice(startIndex, startIndex + 18);
   }
 }
