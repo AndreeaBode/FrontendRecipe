@@ -38,6 +38,7 @@ export class RecipeUnderReviewComponent implements OnInit {
         .subscribe(() => {
           this.loadRecipesUnderReview();
           this.deleteRecipe(recipeId);
+          window.location.reload();
         });
     }
   }
@@ -46,6 +47,7 @@ export class RecipeUnderReviewComponent implements OnInit {
     this.recipeUnderReviewService.deleteRecipe(recipeId)
       .subscribe(() => {
         this.loadRecipesUnderReview();
+        window.location.reload();
       });
   }
 
@@ -53,6 +55,7 @@ export class RecipeUnderReviewComponent implements OnInit {
     this.recipeUnderReviewService.deleteRecipe(recipeId)
       .subscribe(() => {
         this.loadRecipesUnderReview();
+        window.location.reload();
       });
   }
 
