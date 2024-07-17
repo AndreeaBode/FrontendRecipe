@@ -189,7 +189,7 @@ export class DetailsComponent implements OnInit {
       this.recipeService.addCommentToRecipe(id, userId, username, { content: this.newComment }, additionalPath)?.subscribe((comment) => {
         this.comments.push(comment);
         this.newComment = '';
-        location.reload();
+        //location.reload();
       });
     }
   }
