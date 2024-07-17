@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit {
         role: this.selectedRole,
       };
 
-      this.http.post('http://localhost:8080/register', signupData).subscribe(
+      this.http.post('https://backendrecipe-production.up.railway.app/register', signupData).subscribe(
         (response: any) => {
 
           console.log("response.token")
