@@ -4,6 +4,7 @@ import { Recipe } from '../models/recipe';
 import { Ingredient } from '../models/ingredient';
 import { Instruction } from '../models/instruction';
 import { ToastrService } from 'ngx-toastr';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-recipe',
@@ -24,11 +25,11 @@ export class AddRecipeComponent {
     }
   
     const recipe = new Recipe(this.recipe.title, this.recipe.image, this.recipe.ingredients, this.recipe.instructions);
-    console.log("A", recipe);
+    console.log("Recipe to submit:", recipe);
   
     this.recipeService.submitRecipe(recipe)
       .subscribe(
-        (response: any) => {
+        (response: HttpResponse<any>) => {
           if (response.status === 201) {
             this.toastr.success('Rețetă adăugată cu succes!', 'Succes');
             this.resetForm();
@@ -44,6 +45,7 @@ export class AddRecipeComponent {
         }
       );
   }
+  
   
 
   resetForm(): void {

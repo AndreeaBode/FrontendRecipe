@@ -5,6 +5,7 @@ import { RecipeUnderReviewService } from '../services/recipe-under-review.servic
 import { Recipe } from '../models/recipe';
 import { Ingredient } from '../models/ingredient';
 import { Instruction } from '../models/instruction';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-under-review',
@@ -14,7 +15,7 @@ import { Instruction } from '../models/instruction';
 export class RecipeUnderReviewComponent implements OnInit {
   recipes: any[] = [];
 
-  constructor(private recipeUnderReviewService: RecipeUnderReviewService, private recipeService: RecipeService) { }
+  constructor(private recipeUnderReviewService: RecipeUnderReviewService, private recipeService: RecipeService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadRecipesUnderReview();
@@ -38,7 +39,7 @@ export class RecipeUnderReviewComponent implements OnInit {
         .subscribe(() => {
           this.loadRecipesUnderReview();
           this.deleteRecipe(recipeId);
-          window.location.reload();
+          this.cdr.detectChanges();
         });
     }
   }
@@ -47,7 +48,7 @@ export class RecipeUnderReviewComponent implements OnInit {
     this.recipeUnderReviewService.deleteRecipe(recipeId)
       .subscribe(() => {
         this.loadRecipesUnderReview();
-        this.removeRecipeFromList(recipeId);
+        this.cdr.detectChanges();
       });
   }
 
@@ -55,14 +56,11 @@ export class RecipeUnderReviewComponent implements OnInit {
     this.recipeUnderReviewService.deleteRecipe(recipeId)
       .subscribe(() => {
         this.loadRecipesUnderReview();
-        this.removeRecipeFromList(recipeId);
+        this.cdr.detectChanges();
       });
   }
 
   
-  removeRecipeFromList(recipeId: number): void {
-    this.recipes = this.recipes.filter(r => r.id !== recipeId);
-  }
 
   private convertToRecipe(recipeUnderReview: RecipeUnderReview): Recipe {
     console.log("recipeUnderReview", recipeUnderReview);

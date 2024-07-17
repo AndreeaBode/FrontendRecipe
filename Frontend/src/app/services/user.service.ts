@@ -11,6 +11,7 @@ import { throwError } from 'rxjs';
 export class UserService {
   private userUrl = 'https://backendrecipe-production.up.railway.app';  
 
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
