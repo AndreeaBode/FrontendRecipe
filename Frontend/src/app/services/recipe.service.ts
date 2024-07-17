@@ -94,7 +94,7 @@ export class RecipeService {
 
 
   submitRecipe(recipe: Recipe): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'text' });
   
 
     const payload = {

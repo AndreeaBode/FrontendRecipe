@@ -29,14 +29,14 @@ export class AddRecipeComponent {
     this.recipeService.submitRecipe(recipe)
       .subscribe(
         (response: any) => {
-          if (response.status === 201) {
+          // if (response.status === 201) {
             this.toastr.success('Rețetă adăugată cu succes!', 'Succes');
             this.resetForm();
             this.newIngredient = '';
             this.newInstruction = '';
-          } else {
-            this.toastr.error('Eroare la adăugarea rețetei. Te rugăm să încerci din nou mai târziu.', 'Eroare');
-          }
+          // } else {
+            // this.toastr.error('Eroare la adăugarea rețetei. Te rugăm să încerci din nou mai târziu.', 'Eroare');
+          //  }
         },
         (error: any) => {
           console.error('Eroare la adăugarea rețetei:', error);
